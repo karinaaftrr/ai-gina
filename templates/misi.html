@@ -1,0 +1,1093 @@
+{% extends 'base.html' %}
+
+{% block title %}Misi {{ mission.number }}: {{ mission.title }} — AI GINA{% endblock %}
+
+{% block content %}
+<div
+  id="missionPage"
+  data-mission-id="{{ mission.id }}"
+  data-briefing="{{ mission.briefing }}"
+>
+
+<section class="mission-detail-hero">
+  <div class="container mission-hero-inner">
+
+    <div class="mission-hero-left">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+        <span class="badge-pill badge-red">
+          MISI {{ mission.number }} DARI {{ total_missions }}
+        </span>
+
+        <span style="font-size:0.9rem;opacity:0.85;">
+          Modul Detektif Muda
+        </span>
+      </div>
+
+      <h1>{{ mission.title }}</h1>
+      <p>{{ mission.tagline }}</p>
+    </div>
+
+    <div>
+      <a
+        href="{{ url_for('belajar') }}"
+        class="btn btn-secondary btn-sm"
+        style="background:rgba(255,255,255,0.15);color:#fff!important;border-color:rgba(255,255,255,0.3);"
+      >
+        Kembali ke Peta
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="container" style="padding-top:40px;padding-bottom:70px;">
+
+  <div class="briefing-box" id="briefingSection">
+
+    <div class="gina-chat-avatar">
+      <svg
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+
+    <div class="briefing-chat-bubble">
+
+      <div class="briefing-agent-name">
+        <span>AI GINA (Pendamping Belajar)</span>
+
+        <span
+          class="badge-pill badge-blue"
+          style="font-size:0.65rem;"
+        >
+          Online
+        </span>
+      </div>
+
+      <div
+        class="briefing-text"
+        id="briefingSpeechText"
+      >
+        {{ mission.briefing }}
+      </div>
+
+      <div class="briefing-action-btn">
+        <button
+          class="btn btn-primary btn-sm"
+          onclick="document.getElementById('targetMisi').scrollIntoView({behavior:'smooth'}); if(typeof SoundFX !== 'undefined' && SoundFX.playPop) SoundFX.playPop();"
+        >
+          Siap, GINA! Buka Target Misi
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div
+    class="target-card"
+    id="targetMisi"
+  >
+
+    <div style="display:flex;align-items:center;gap:12px;">
+
+      <div
+        style="width:32px;height:32px;border-radius:50%;background:var(--color-blue);color:#fff;display:flex;align-items:center;justify-content:center;"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+      </div>
+
+      <h3
+        style="font-size:1.3rem;color:var(--color-navy);margin:0;"
+      >
+        Target Detektif Kali Ini
+      </h3>
+
+    </div>
+
+    <ul class="target-list">
+
+      {% for target in mission.targets %}
+
+      <li class="target-item">
+
+        <span class="target-check-icon">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+
+        <span>{{ target }}</span>
+
+      </li>
+
+      {% endfor %}
+
+    </ul>
+
+  </div>
+
+  <div style="margin-bottom:24px;">
+
+    <span class="section-subtitle">
+      Materi Penyelidikan
+    </span>
+
+    <h2 style="font-size:1.8rem;margin-bottom:16px;">
+      Catatan Fakta Detektif
+    </h2>
+
+  </div>
+
+  <div class="materials-grid">
+
+    {% for mat in mission.materials %}
+
+    <div class="material-card">
+
+      <div
+        style="width:32px;height:32px;border-radius:8px;background:var(--color-blue-tint);color:var(--color-blue);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+
+      <h3>{{ mat.title }}</h3>
+
+      <p
+        style="font-size:0.925rem;color:var(--color-navy-medium);"
+      >
+        {{ mat.desc }}
+      </p>
+
+    </div>
+
+    {% endfor %}
+
+  </div>
+
+  <div class="funfact-box">
+
+    <div
+      class="funfact-icon"
+      style="color:var(--color-red);"
+    >
+      <svg
+        width="38"
+        height="38"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 18h6"></path>
+        <path d="M10 22h4"></path>
+        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+      </svg>
+    </div>
+
+    <div class="funfact-text">
+      <h4>Tahukah Kamu?</h4>
+      <p>{{ mission.fun_fact }}</p>
+    </div>
+
+  </div>
+
+  <div
+    class="activity-wrapper"
+    id="activitySection"
+  >
+
+    <div class="activity-header">
+
+      <div>
+
+        <span
+          class="badge-pill badge-blue"
+          style="margin-bottom:6px;"
+        >
+          LAB DETEKTIF
+        </span>
+
+        <h3
+          style="font-size:1.5rem;color:var(--color-navy);"
+        >
+          Aktivitas Interaktif Detektif
+        </h3>
+
+      </div>
+
+      <div
+        style="width:36px;height:36px;border-radius:50%;background:var(--color-blue-tint);color:var(--color-blue);display:flex;align-items:center;justify-content:center;"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M10 2v7.31"></path>
+          <path d="M14 9.3V2"></path>
+          <path d="M8.5 2h7"></path>
+          <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+          <path d="M5.52 16h12.96"></path>
+        </svg>
+      </div>
+
+    </div>
+
+    {% if mission.id == 1 %}
+
+    <div>
+
+      <p
+        style="font-size:0.95rem;margin-bottom:16px;"
+      >
+        Gunakan kalkulator perbandingan ini untuk melihat bagaimana perubahan volume darah mempengaruhi rasio penyaringan oleh ginjal:
+      </p>
+
+      <table class="calc-table">
+
+        <thead>
+          <tr>
+            <th>Parameter Data</th>
+            <th>Nilai Pengamatan</th>
+            <th>Keterangan Medis Ramah Anak</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              <strong>Volume Darah yang Disaring</strong>
+            </td>
+
+            <td>
+              <span
+                id="bloodValDisplay"
+                style="color:var(--color-blue);font-weight:700;"
+              >
+                180 Liter
+              </span>
+            </td>
+
+            <td>
+              Darah dialirkan berulang kali sepanjang hari
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Volume Cairan Urine Dihasilkan</strong>
+            </td>
+
+            <td>
+              <strong>1,5 Liter</strong>
+            </td>
+
+            <td>
+              Zat sisa metabolisme yang dikeluarkan
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Persentase Cairan Diserap Kembali</strong>
+            </td>
+
+            <td>
+              <strong>&gt; 99%</strong>
+            </td>
+
+            <td>
+              Cairan bersih dikembalikan ke tubuh
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <div style="margin:24px 0;">
+
+        <label
+          for="bloodSlider"
+          style="display:block;font-weight:700;font-size:0.9rem;margin-bottom:8px;"
+        >
+          Uji Coba Eksperimen: Geser Volume Darah (100 - 240 Liter):
+        </label>
+
+        <input
+          type="range"
+          id="bloodSlider"
+          min="100"
+          max="240"
+          step="10"
+          value="180"
+          class="custom-range-slider"
+        >
+
+      </div>
+
+      <div class="highlight-calc-box">
+
+        <div
+          style="font-size:0.9rem;font-weight:600;color:var(--color-navy-medium);"
+        >
+          Hasil Rasio Matematika:
+        </div>
+
+        <div
+          class="highlight-calc-num"
+          id="ratioValDisplay"
+        >
+          120 Kali Lipat
+        </div>
+
+        <div
+          id="bottlesCountDisplay"
+          style="font-size:1rem;color:var(--color-navy);font-weight:600;margin-top:6px;"
+        >
+          Setara 120 botol air mineral ukuran besar (1,5 L)!
+        </div>
+
+      </div>
+
+    </div>
+
+    {% elif mission.id == 2 %}
+
+    <div>
+
+      <p
+        style="font-size:0.95rem;margin-bottom:16px;"
+      >
+        Klik tombol sinyal tubuh di bawah ini untuk menambahkan frekuensi laporan kasus siswa dan saksikan diagram batang naik secara dinamis:
+      </p>
+
+      <div class="chart-controls">
+
+        <button
+          class="chart-tag-btn"
+          onclick="addSignalCount('Kurang Minum')"
+        >
+          + Lapor Kurang Minum
+        </button>
+
+        <button
+          class="chart-tag-btn"
+          onclick="addSignalCount('Tahan Pipis')"
+        >
+          + Lapor Tahan Pipis
+        </button>
+
+        <button
+          class="chart-tag-btn"
+          onclick="addSignalCount('Urine Pekat')"
+        >
+          + Lapor Urine Pekat
+        </button>
+
+        <button
+          class="chart-tag-btn"
+          onclick="addSignalCount('Cepat Lelah')"
+        >
+          + Lapor Cepat Lelah
+        </button>
+
+      </div>
+
+      <div
+        class="bar-chart-visual"
+        id="barChartColumns"
+      ></div>
+
+      <p
+        style="font-size:0.85rem;color:var(--color-navy-medium);text-align:center;margin-top:14px;"
+      >
+        Catatan: Diagram batang di atas menunjukkan frekuensi kemunculan masing-masing sinyal tubuh.
+      </p>
+
+    </div>
+
+    {% elif mission.id == 3 %}
+
+    <div>
+
+      <p
+        style="font-size:0.95rem;margin-bottom:16px;"
+      >
+        Centang petunjuk yang kamu temukan pada kasus. Amati bagaimana rumus kecerdasan buatan mengalikan setiap gejala dengan bobotnya:
+      </p>
+
+      <div class="weight-calc-grid">
+
+        <div id="symptomsToggleList"></div>
+
+        <div class="math-formula-display">
+
+          <div class="math-formula-title">
+            Rumus Sistem Pakar Detektif
+          </div>
+
+          <div
+            style="font-size:0.9rem;color:rgba(255,255,255,0.85);margin-top:4px;"
+          >
+            Total = (Bobot × Status Gejala)
+          </div>
+
+          <div
+            class="math-formula-steps"
+            id="mathFormulaSteps"
+          >
+            (3 × 0) + (2 × 0) + (1 × 0)
+          </div>
+
+          <div
+            class="math-formula-total"
+            id="mathFormulaTotal"
+          >
+            0
+          </div>
+
+          <div
+            style="font-size:0.85rem;color:rgba(255,255,255,0.7);"
+          >
+            Total Skor Risiko Matematika
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {% elif mission.id == 4 %}
+
+    <div class="fuzzy-slider-box">
+
+      <p
+        style="font-size:0.95rem;margin-bottom:16px;"
+      >
+        Geser skala skor dari 0 sampai 100 untuk melihat bagaimana konsep logika fuzzy membantu mengelompokkan tingkat risiko secara bertahap.
+      </p>
+
+      <div
+        style="text-align:center;margin-bottom:10px;"
+      >
+
+        <span
+          style="font-size:1.1rem;font-weight:700;"
+        >
+          Nilai Skor:
+        </span>
+
+        <span
+          id="fuzzyScoreDisplay"
+          style="font-size:2.2rem;font-weight:800;color:var(--color-blue);"
+        >
+          50
+        </span>
+
+      </div>
+
+      <input
+        type="range"
+        id="fuzzyRangeSlider"
+        min="0"
+        max="100"
+        value="50"
+        class="custom-range-slider"
+      >
+
+      <div class="fuzzy-meter-track"></div>
+
+      <div class="fuzzy-zones-labels">
+
+        <span>
+          0 — Rendah (0–39)
+        </span>
+
+        <span>
+          Sedang (40–59)
+        </span>
+
+        <span>
+          Tinggi (60–100) — 100
+        </span>
+
+      </div>
+
+      <div
+        class="fuzzy-status-card medium"
+        id="fuzzyStatusCard"
+      >
+
+        <h4
+          id="fuzzyStatusLabel"
+          style="font-size:1.2rem;margin-bottom:4px;"
+        >
+          Kategori: Risiko Sedang
+        </h4>
+
+        <p
+          id="fuzzyStatusDesc"
+          style="font-size:0.925rem;"
+        >
+          Derajat keanggotaan akan berubah mengikuti nilai skor.
+        </p>
+
+      </div>
+
+    </div>
+
+    {% elif mission.id == 5 %}
+
+    <div>
+
+      <p
+        style="font-size:0.95rem;margin-bottom:16px;"
+      >
+        Catatan konsumsi air putih siswa dalam seminggu (7 hari):
+        <strong>
+          [4 gelas, 6 gelas, 4 gelas, 3 gelas, 4 gelas, 7 gelas, 5 gelas]
+        </strong>.
+        Klik kartu yang merupakan <strong>MODUS</strong> (nilai yang paling sering muncul):
+      </p>
+
+      <div class="mode-items-grid">
+
+        <div
+          class="mode-item-card"
+          id="mode-item-3"
+          onclick="checkModeChoice(3, false)"
+        >
+          <div class="mode-item-count">
+            3 Gelas
+          </div>
+
+          <div
+            style="font-size:0.8rem;color:var(--color-navy-medium);margin-top:4px;"
+          >
+            Muncul: 1 hari
+          </div>
+        </div>
+
+        <div
+          class="mode-item-card"
+          id="mode-item-4"
+          onclick="checkModeChoice(4, true)"
+        >
+          <div class="mode-item-count">
+            4 Gelas
+          </div>
+
+          <div
+            style="font-size:0.8rem;color:var(--color-navy-medium);margin-top:4px;"
+          >
+            Muncul: 3 hari
+          </div>
+        </div>
+
+        <div
+          class="mode-item-card"
+          id="mode-item-5"
+          onclick="checkModeChoice(5, false)"
+        >
+          <div class="mode-item-count">
+            5 Gelas
+          </div>
+
+          <div
+            style="font-size:0.8rem;color:var(--color-navy-medium);margin-top:4px;"
+          >
+            Muncul: 1 hari
+          </div>
+        </div>
+
+        <div
+          class="mode-item-card"
+          id="mode-item-6"
+          onclick="checkModeChoice(6, false)"
+        >
+          <div class="mode-item-count">
+            6 Gelas
+          </div>
+
+          <div
+            style="font-size:0.8rem;color:var(--color-navy-medium);margin-top:4px;"
+          >
+            Muncul: 1 hari
+          </div>
+        </div>
+
+      </div>
+
+      <div
+        id="modeFinderFeedback"
+        class="quiz-feedback-box"
+      ></div>
+
+    </div>
+
+    {% elif mission.id == 6 %}
+
+    <div>
+
+      <p
+        style="font-size:0.95rem;margin-bottom:20px;"
+      >
+        Selamat datang di Papan Penyelidikan Utama! Selesaikan 3 langkah di bawah untuk menuntaskan kasus penyelamatan ginjal:
+      </p>
+
+      <div
+        id="capstone-step-1"
+        style="background-color:var(--color-bg-light);border:1px solid var(--color-navy-soft);border-radius:var(--radius-md);padding:20px;margin-bottom:16px;"
+      >
+
+        <h4>
+          Langkah 1: Analisis Laporan Siswa "Doni"
+        </h4>
+
+        <p
+          style="font-size:0.9rem;margin:8px 0 14px;"
+        >
+          Doni sering minum minuman bersoda, minum air putih hanya 3 gelas sehari, urine berwarna keruh, dan mengeluh pinggang pegal.
+        </p>
+
+        <button
+          class="btn btn-secondary btn-sm"
+          onclick="completeCapstoneStep(1)"
+        >
+          Verifikasi Data Kasus
+        </button>
+
+      </div>
+
+      <div
+        id="capstone-step-2"
+        style="display:none;background-color:var(--color-bg-light);border:1px solid var(--color-navy-soft);border-radius:var(--radius-md);padding:20px;margin-bottom:16px;"
+      >
+
+        <h4>
+          Langkah 2: Hitung Skor Risiko Berbobot
+        </h4>
+
+        <p
+          style="font-size:0.9rem;margin:8px 0 14px;"
+        >
+          (Gejala Utama × 3) + (Gejala Pendukung × 2) = 15 + 10 = <strong>25 Poin</strong>.
+          Dikonversi ke skala 100 menghasilkan <strong>Skor 83</strong>.
+        </p>
+
+        <button
+          class="btn btn-secondary btn-sm"
+          onclick="completeCapstoneStep(2)"
+        >
+          Konfirmasi Skor Berbobot
+        </button>
+
+      </div>
+
+      <div
+        id="capstone-step-3"
+        style="display:none;background-color:var(--color-blue-tint);border:2px solid var(--color-blue);border-radius:var(--radius-md);padding:20px;"
+      >
+
+        <h4 style="color:var(--color-blue);">
+          Langkah 3: Kesimpulan & Solusi Fuzzy
+        </h4>
+
+        <p
+          style="font-size:0.9rem;margin:8px 0 14px;color:var(--color-navy);"
+        >
+          Skor 83 berada pada interval <strong>Tinggi (60–100)</strong>.
+          Solusi detektif: Anjurkan perbanyak air putih, kurangi minuman manis kemasan, dan ceritakan keluhan kepada orang tua!
+        </p>
+
+        <div
+          style="font-weight:700;color:#2ED573;font-size:1.1rem;"
+        >
+          Kasus Berhasil Dipecahkan!
+        </div>
+
+      </div>
+
+    </div>
+
+    {% endif %}
+
+  </div>
+
+  <div
+    class="challenge-box"
+    id="challengeSection"
+  >
+
+    <div
+      style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"
+    >
+
+      <div
+        style="width:36px;height:36px;border-radius:50%;background:var(--color-red-tint);color:var(--color-red);display:flex;align-items:center;justify-content:center;"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+
+      <div>
+
+        <span class="badge-pill badge-red">
+          TANTANGAN DETEKTIF
+        </span>
+
+        <h3
+          style="font-size:1.4rem;color:var(--color-navy);margin-top:4px;"
+        >
+          Uji Pemahaman Misi {{ mission.number }}
+        </h3>
+
+      </div>
+
+    </div>
+
+    {% if mission.challenge %}
+
+    <div class="quiz-question-text">
+      {{ mission.challenge.question }}
+    </div>
+
+    <div class="quiz-options-list">
+
+      {% for opt in mission.challenge.options %}
+
+      <button
+        class="quiz-option-btn"
+        data-selected-index="{{ loop.index0 }}"
+        data-correct-index="{{ mission.challenge.correct }}"
+        data-mission-id="{{ mission.id }}"
+        data-badge-id="{{ mission.badge_id }}"
+        data-badge-name="{{ mission.badge_name }}"
+        data-explanation="{{ mission.challenge.explanation }}"
+        data-next-url="{% if mission.next_mission %}{{ url_for('misi', misi_id=mission.next_mission) }}{% else %}{{ url_for('belajar') }}{% endif %}"
+        onclick="handleMissionChallenge(this)"
+      >
+
+        <span
+          style="width:28px;height:28px;border-radius:50%;background:var(--color-navy-tint);display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;"
+        >
+          {{ ['A', 'B', 'C', 'D'][loop.index0] }}
+        </span>
+
+        <span>
+          {{ opt }}
+        </span>
+
+      </button>
+
+      {% endfor %}
+
+    </div>
+
+    <div
+      class="quiz-feedback-box"
+      id="quizFeedbackBox"
+    ></div>
+
+    <div
+      style="margin-top:24px;text-align:center;"
+    >
+
+      <button
+        class="btn btn-accent btn-lg"
+        id="claimBadgeBtn"
+        style="display:none;"
+      >
+        Ambil Lencana {{ mission.badge_name }}
+      </button>
+
+    </div>
+
+    {% else %}
+
+    <div
+      class="quiz-feedback-box show"
+    >
+      Tantangan misi belum tersedia.
+    </div>
+
+    {% endif %}
+
+  </div>
+
+  <div class="summary-box">
+
+    <div
+      style="display:flex;align-items:center;gap:12px;"
+    >
+
+      <div
+        style="width:32px;height:32px;border-radius:6px;background:var(--color-blue-tint);color:var(--color-blue);display:flex;align-items:center;justify-content:center;"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        </svg>
+      </div>
+
+      <h3
+        style="font-size:1.25rem;color:var(--color-navy);margin:0;"
+      >
+        Catatan Rangkuman Detektif
+      </h3>
+
+    </div>
+
+    <ul class="summary-list">
+
+      {% for point in mission.summary %}
+
+      <li class="summary-item">
+
+        <span
+          style="color:var(--color-blue);font-weight:700;"
+        >
+          •
+        </span>
+
+        <span>
+          {{ point }}
+        </span>
+
+      </li>
+
+      {% endfor %}
+
+    </ul>
+
+  </div>
+
+  <div class="mission-nav-footer">
+
+    <a
+      href="{{ url_for('belajar') }}"
+      class="btn btn-secondary"
+    >
+      Kembali ke Peta Petualangan
+    </a>
+
+    {% if mission.next_mission %}
+
+    <a
+      href="{{ url_for('misi', misi_id=mission.next_mission) }}"
+      class="btn btn-primary"
+    >
+      Misi Berikutnya
+      (Misi 0{{ mission.next_mission }}) →
+    </a>
+
+    {% else %}
+
+    <a
+      href="{{ url_for('simulasi') }}"
+      class="btn btn-primary"
+    >
+      Menuju Simulasi Kasus
+    </a>
+
+    {% endif %}
+
+  </div>
+
+</div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const missionPage = document.getElementById('missionPage');
+
+    if (!missionPage) {
+        return;
+    }
+
+    const missionId = Number(
+        missionPage.dataset.missionId || 0
+    );
+
+    const briefingElement =
+        document.getElementById('briefingSpeechText');
+
+    if (
+        briefingElement &&
+        typeof initTypewriter === 'function'
+    ) {
+        const briefingText =
+            briefingElement.textContent.trim();
+
+        briefingElement.textContent = '';
+
+        initTypewriter(
+            briefingText,
+            'briefingSpeechText',
+            20
+        );
+    }
+
+    if (
+        missionId === 1 &&
+        typeof initMission1Activity === 'function'
+    ) {
+        initMission1Activity();
+    }
+
+    if (
+        missionId === 2 &&
+        typeof initMission2Activity === 'function'
+    ) {
+        initMission2Activity();
+    }
+
+    if (
+        missionId === 3 &&
+        typeof renderMission3Calc === 'function'
+    ) {
+        renderMission3Calc();
+    }
+
+    if (
+        missionId === 4 &&
+        typeof initMission4Activity === 'function'
+    ) {
+        initMission4Activity();
+    }
+
+});
+
+function handleMissionChallenge(button) {
+
+    if (!button) {
+        return;
+    }
+
+    const selectedIndex =
+        Number(
+            button.dataset.selectedIndex || 0
+        );
+
+    const correctIndex =
+        Number(
+            button.dataset.correctIndex || 0
+        );
+
+    const missionId =
+        Number(
+            button.dataset.missionId || 0
+        );
+
+    const badgeId =
+        button.dataset.badgeId || '';
+
+    const badgeName =
+        button.dataset.badgeName || '';
+
+    const explanation =
+        button.dataset.explanation || '';
+
+    const nextUrl =
+        button.dataset.nextUrl || '';
+
+    if (
+        typeof checkChallengeAnswer !== 'function'
+    ) {
+        return;
+    }
+
+    checkChallengeAnswer(
+        selectedIndex,
+        correctIndex,
+        explanation,
+        missionId,
+        badgeId,
+        badgeName,
+        '',
+        nextUrl
+    );
+}
+</script>
+{% endblock %}

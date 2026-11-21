@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+
+{% block title %}AI GINA — Petualangan Detektif Ginjal | Beranda{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-pill">
+        <span>Petualangan Belajar Interaktif SD</span>
+      </div>
+      <h1 class="hero-title">
+        Yuk, Jadi Detektif Bersama <span class="highlight-blue">AI</span> <span class="highlight-red">GINA!</span>
+      </h1>
+      <p class="hero-desc">
+        Jelajahi dunia ginjal, pecahkan tantangan, dan gunakan matematika untuk menemukan jawabannya. Bersiaplah mengumpulkan lencana detektif terhebat!
+      </p>
+      
+      <div class="hero-buttons">
+        <a href="{{ url_for('belajar') }}" class="btn btn-primary btn-lg">
+          Mulai Petualangan
+        </a>
+        <a href="#kenalan" class="btn btn-secondary btn-lg">
+          Kenalan dengan GINA
+        </a>
+      </div>
+
+      <div class="hero-badges-row">
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">6 MISI</div>
+          <div class="hero-stat-label">Tantangan Terstruktur</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Interaktif & Edukatif</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">KELAS 5-6</div>
+          <div class="hero-stat-label">Matematika & Sains SD</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI GINA Visual Avatar Card -->
+    <div class="hero-visual-card">
+      <div class="floating-pill-detective">Detektif Pendamping</div>
+      <div class="character-avatar-wrap">
+        <div class="character-avatar-inner">
+          <img
+            src="{{ url_for('static', filename='images/ai-gina1.png') }}"
+            alt="AI GINA"
+            class="gina-avatar-image"
+          >
+        </div>
+      </div>
+      <div class="character-name-badge">AI GINA</div>
+      <div class="character-sub">Sahabat & Pemandu Investigasimu</div>
+      
+      <div class="character-speech-bubble">
+        "Halo, Detektif Muda! Siap menyelidiki rahasia angka di balik tubuh sehat kita?"
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: KENALAN DULU DENGAN GINA -->
+<section class="section" id="kenalan">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Kenalan Dulu</span>
+      <h2 class="section-title">Siapa AI GINA?</h2>
+      <p class="section-desc">
+        GINA adalah teman belajar yang akan menemanimu menyelesaikan berbagai misi seru seputar matematika dan organ ginjal.
+      </p>
+    </div>
+
+    <div class="about-gina-grid">
+      <!-- Role List -->
+      <div class="card-gina-profile">
+        <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Peran Utama AI GINA</h3>
+        <p style="font-size: 0.95rem;">Sebagai pendamping belajarmu, AI GINA akan membantumu dalam hal-hal berikut:</p>
+        
+        <ul class="gina-role-list">
+          <li class="gina-role-item">
+            <div class="gina-role-icon">
+              <i class="fa-solid fa-compass"></i>
+            </div>
+            <div>
+              <strong>Pemberi Arahan Misi:</strong>
+              Memandu setiap langkah penyelidikan dari Misi 1 sampai Misi 6.
+            </div>
+          </li>
+
+          <li class="gina-role-item">
+            <div class="gina-role-icon">
+              <i class="fa-solid fa-chart-column"></i>
+            </div>
+            <div>
+              <strong>Membantu Memahami Data:</strong>
+              Mengajakmu membaca grafik, tabel, dan pola angka dengan mudah.
+            </div>
+          </li>
+
+          <li class="gina-role-item">
+            <div class="gina-role-icon">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <div>
+              <strong>Tantangan Belajar:</strong>
+              Memberikan kuis detektif yang melatih logika berpikirmu.
+            </div>
+          </li>
+
+          <li class="gina-role-item">
+            <div class="gina-role-icon">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div>
+              <strong>Apresiasi & Lencana:</strong>
+              Memberikan lencana kehormatan setiap kali kamu menuntaskan sebuah misi!
+            </div>
+          </li>
+        </ul>
+
+        <div class="not-a-doctor-box">
+          <strong>PENTING: AI GINA Bukan Dokter!</strong>
+          AI GINA adalah program komputer pendamping belajar siswa, bukan pengganti dokter atau tenaga medis. GINA tidak memberikan diagnosis penyakit, melainkan simulasi pembelajaran berhitung dan data hidup sehat.
+        </div>
+      </div>
+
+      <!-- Detective Identity Card -->
+      <div style="background-color: var(--color-white); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md); border: 2px dashed var(--color-blue); text-align: center;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--color-blue-tint); color: var(--color-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div class="badge-pill badge-blue" style="margin-bottom: 14px;">STATUS KAMU DI WEBSITE INI</div>
+        <h3 style="font-size: 1.8rem; color: var(--color-navy); margin-bottom: 10px;">"Detektif Muda"</h3>
+        <p style="font-size: 1rem; color: var(--color-navy-medium); margin-bottom: 24px;">
+          Di sini kamu bukan sekadar membaca buku teks. Kamu adalah seorang <strong>penyelidik cilik</strong> yang memecahkan teka-teki menggunakan matematika, data frekuensi, dan kecerdasan logika!
+        </p>
+        <a href="{{ url_for('belajar') }}" class="btn btn-primary">
+          Buka Kasus Pertama
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: PETUALANGAN DIMULAI (Journey Preview) -->
+<section class="section" style="background-color: var(--color-white); border-top: 1px solid var(--color-navy-soft); border-bottom: 1px solid var(--color-navy-soft);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Peta Penjelajahan</span>
+      <h2 class="section-title">Enam Misi Menantang Menunggumu!</h2>
+      <p class="section-desc">
+        Setiap misi dirancang bertahap untuk menghubungkan kemampuan matematika SD dengan pemahaman cara kerja tubuh kita.
+      </p>
+    </div>
+
+    <div class="missions-preview-grid">
+      <!-- Misi 01 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 01</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">01</span>
+        </div>
+        <h3 class="mission-card-title">Mengenal Si Penyaring Darah</h3>
+        <p class="mission-card-desc">Bongkar rahasia angka di balik 180 liter darah yang disaring ginjal setiap hari!</p>
+        <a href="{{ url_for('misi', misi_id=1) }}" class="btn btn-secondary btn-sm">Mulai Misi 01</a>
+      </div>
+
+      <!-- Misi 02 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 02</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">02</span>
+        </div>
+        <h3 class="mission-card-title">Membaca Sinyal Tubuh</h3>
+        <p class="mission-card-desc">Kelompokkan keluhan ke dalam tabel frekuensi dan buat diagram batang interaktif.</p>
+        <a href="{{ url_for('misi', misi_id=2) }}" class="btn btn-secondary btn-sm">Mulai Misi 02</a>
+      </div>
+
+      <!-- Misi 03 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 03</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">03</span>
+        </div>
+        <h3 class="mission-card-title">Menghitung Risiko</h3>
+        <p class="mission-card-desc">Gunakan perkalian dan penjumlahan bobot gejala seperti cara kerja kecerdasan buatan.</p>
+        <a href="{{ url_for('misi', misi_id=3) }}" class="btn btn-secondary btn-sm">Mulai Misi 03</a>
+      </div>
+
+      <!-- Misi 04 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 04</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">04</span>
+        </div>
+        <h3 class="mission-card-title">Menjelajah Dunia Fuzzy</h3>
+        <p class="mission-card-desc">Dunia tidak hanya hitam-putih! Pahami derajat risiko Rendah, Sedang, dan Tinggi.</p>
+        <a href="{{ url_for('misi', misi_id=4) }}" class="btn btn-secondary btn-sm">Mulai Misi 04</a>
+      </div>
+
+      <!-- Misi 05 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 05</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">05</span>
+        </div>
+        <h3 class="mission-card-title">Menemukan Pola</h3>
+        <p class="mission-card-desc">Cari nilai yang paling sering muncul (MODUS) untuk membongkar pola kebiasaan harian.</p>
+        <a href="{{ url_for('misi', misi_id=5) }}" class="btn btn-secondary btn-sm">Mulai Misi 05</a>
+      </div>
+
+      <!-- Misi 06 -->
+      <div class="mission-preview-card">
+        <div class="mission-card-top">
+          <span class="mission-badge-number">MISI 06</span>
+          <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-blue);">06</span>
+        </div>
+        <h3 class="mission-card-title">Operasi Penyelamatan Ginjal</h3>
+        <p class="mission-card-desc">Satukan seluruh kemampuan detektifmu untuk memecahkan investigasi kasus puncak!</p>
+        <a href="{{ url_for('misi', misi_id=6) }}" class="btn btn-secondary btn-sm">Mulai Misi 06</a>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="{{ url_for('belajar') }}" class="btn btn-primary btn-lg">
+        Lihat Peta Petualangan Lengkap
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: APA YANG AKAN KAMU TEMUKAN? (4 Pilar) -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Keahlian Detektif</span>
+      <h2 class="section-title">Apa yang Akan Kamu Temukan?</h2>
+      <p class="section-desc">
+        Empat keterampilan penting yang akan kamu asah selama menjelajah bersama AI GINA:
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <!-- Card 1 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Menyelidiki Data</h3>
+        <p class="pillar-desc">Belajar membaca tabel, volume cairan, dan informasi fakta tubuh secara cermat dan kritis.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+            <line x1="8" y1="6" x2="16" y2="6"></line>
+            <line x1="16" y1="14" x2="16" y2="18"></line>
+            <path d="M16 10h.01"></path>
+            <path d="M12 10h.01"></path>
+            <path d="M8 10h.01"></path>
+            <path d="M12 14h.01"></path>
+            <path d="M8 14h.01"></path>
+            <path d="M12 18h.01"></path>
+            <path d="M8 18h.01"></path>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Bermain Angka</h3>
+        <p class="pillar-desc">Menggunakan penjumlahan, perkalian bobot, dan skala rasio untuk membuktikan hipotesis.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Memahami Pola</h3>
+        <p class="pillar-desc">Mengenali diagram batang, nilai modus, dan derajat fuzzy dari data pengamatan siswa.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="7"></circle>
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Menyelesaikan Misi</h3>
+        <p class="pillar-desc">Mengoleksi 6 lencana kehormatan dan menjadi Detektif Teladan Penyelamat Ginjal!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: UNTUK GURU -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="teacher-banner-box">
+      <div class="teacher-banner-content">
+        <div class="badge-pill badge-red" style="margin-bottom: 12px;">RUANG PENDIDIK & GURU SD</div>
+        <h2>Guru, Siap Menemani Misi?</h2>
+        <p>
+          Gunakan AI GINA sebagai media pendamping pembelajaran matematika dan sains interaktif di kelas 5–6 SD. Dilengkapi panduan pedagogis, tujuan pembelajaran Fase C, dan alur integrasi materi.
+        </p>
+      </div>
+      <div>
+        <a href="{{ url_for('guru') }}" class="btn btn-secondary btn-lg" style="white-space: nowrap;">
+          Lihat Panduan Guru
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

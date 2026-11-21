@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}AI GINA — Peta Petualangan 6 Misi{% endblock %}
+
+{% block content %}
+<!-- ADVENTURE HERO & PROGRESS HEADER -->
+<section class="adventure-header">
+  <div class="container">
+    <div class="badge-pill badge-blue" style="margin-bottom: 12px;">PETA PENJELAJAHAN DETEKTIF MUDA</div>
+    <h1 class="section-title">
+      PETUALANGAN <span style="color:var(--color-blue);">AI</span> <span style="color:var(--color-red);">GINA</span>
+    </h1>
+    <p style="font-size: 1.15rem; color: var(--color-navy-medium); max-width: 680px; margin: 0 auto;">
+      Enam misi. Banyak tantangan. Satu perjalanan seru untuk menjadi Detektif Muda Penjaga Ginjal Sehat!
+    </p>
+
+    <!-- Progress Card -->
+    <div class="adventure-progress-card">
+      <div class="progress-info-row">
+        <div class="progress-label-wrap">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-blue-tint); color: var(--color-blue); display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="progress-text" id="progressText">0 / 6 Misi Selesai</div>
+            <div style="font-size: 0.8rem; color: var(--color-navy-medium);">Penyelidikan Detektif Berjalan</div>
+          </div>
+        </div>
+        <div id="progressPercent" style="font-size: 1.25rem; font-weight: 800; color: var(--color-blue);">0% Selesai</div>
+      </div>
+
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+
+      <!-- Lencana Detektif Showcase -->
+      <div style="margin-top: 8px;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-navy-medium); text-transform: uppercase; margin-bottom: 8px;">
+          Koleksi Lencana Detektif:
+        </div>
+        <div class="badges-showcase-bar">
+          <div class="badge-item-mini" id="badge-showcase-data_detective">
+            Data Detective
+          </div>
+          <div class="badge-item-mini" id="badge-showcase-signal_decoder">
+            Signal Decoder
+          </div>
+          <div class="badge-item-mini" id="badge-showcase-number_master">
+            Number Master
+          </div>
+          <div class="badge-item-mini" id="badge-showcase-fuzzy_explorer">
+            Fuzzy Explorer
+          </div>
+          <div class="badge-item-mini" id="badge-showcase-pattern_hunter">
+            Pattern Hunter
+          </div>
+          <div class="badge-item-mini" id="badge-showcase-super_detective">
+            Super Detective
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PETA PETUALANGAN (Connected Roadmap) -->
+<section class="map-adventure-container">
+  <div class="container">
+    <div class="map-timeline">
+      {% for m_id, mission in missions.items() %}
+      <div class="timeline-checkpoint-card" id="checkpoint-card-{{ mission.id }}">
+        <!-- Center Node Circle on the Road using Mission Number as Visual Identity -->
+        <div class="checkpoint-node-circle">
+          <span>{{ mission.number }}</span>
+        </div>
+
+        <!-- Mission Card Content -->
+        <div class="checkpoint-content-box">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <span class="badge-pill badge-blue">MISI {{ mission.number }}</span>
+            <span id="checkpoint-status-{{ mission.id }}" style="font-size:0.85rem; font-weight:600;">Siap Dijalankan</span>
+          </div>
+
+          <h3 style="font-size: 1.35rem; margin-bottom: 6px; color: var(--color-navy);">
+            {{ mission.title }}
+          </h3>
+          
+          <p style="font-size: 0.925rem; color: var(--color-navy-medium); margin-bottom: 14px;">
+            {{ mission.tagline }}
+          </p>
+
+          <div style="background-color: var(--color-navy-tint); padding: 12px 14px; border-radius: var(--radius-sm); margin-bottom: 18px;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--color-blue); text-transform: uppercase; margin-bottom: 4px;">
+              Yang akan kamu pelajari:
+            </div>
+            <div style="font-size: 0.85rem; color: var(--color-navy); font-weight: 500;">
+              {{ mission.focus }}
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.825rem; font-weight: 600; color: var(--color-navy);">
+              <span>Lencana:</span>
+              <span class="badge-pill badge-red" style="font-size: 0.725rem;">{{ mission.badge_name }}</span>
+            </div>
+
+            <a href="{{ url_for('misi', misi_id=mission.id) }}" class="btn btn-primary btn-sm" id="checkpoint-btn-{{ mission.id }}">
+              Mulai Misi →
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Extra Action to Simulation -->
+    <div style="background: linear-gradient(135deg, var(--color-blue-tint), var(--color-white)); border: 2px solid var(--color-blue); border-radius: var(--radius-lg); padding: 36px; text-align: center; max-width: 800px; margin: 50px auto 0;">
+      <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--color-blue); color: var(--color-white); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      </div>
+      <h2 style="font-size: 1.8rem; margin: 10px 0;">Sudah Menyelesaikan Seluruh Misi?</h2>
+      <p style="font-size: 1rem; color: var(--color-navy-medium); max-width: 600px; margin: 0 auto 20px;">
+        Uji kecakapan detektifmu dalam <strong>Simulasi Detektif</strong> untuk menganalisis studi kasus nyata menggunakan perhitungan bobot dan logika fuzzy!
+      </p>
+      <a href="{{ url_for('simulasi') }}" class="btn btn-primary btn-lg">
+        Masuk ke Ruang Simulasi
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    updateGlobalProgressUI();
+  });
+</script>
+{% endblock %}

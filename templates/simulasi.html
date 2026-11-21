@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block title %}AI GINA — Simulasi Detektif Muda{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 50px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">Laboratorium Analisis</span>
+      <h1 class="section-title">SIMULASI DETEKTIF</h1>
+      <p class="section-desc">
+        Gunakan pengetahuan matematikamu untuk mencoba menganalisis data kebiasaan sehari-hari.
+      </p>
+    </div>
+
+    <div style="background-color: var(--color-red-tint); border: 2px solid var(--color-red); border-radius: var(--radius-md); padding: 16px 24px; max-width: 820px; margin: 0 auto 30px; display: flex; align-items: center; gap: 16px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-red); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div style="font-size: 0.9rem; color: var(--color-navy);">
+        <strong style="color: var(--color-red); display: block; margin-bottom: 2px;">PERHATIAN KESELAMATAN & ETIKA DETEKTIF:</strong>
+        Hasil akhir pengamatan ini adalah <strong>Tingkat Risiko Simulasi Pembelajaran</strong>, bukan vonis atau diagnosis medis. Selalu diskusikan kondisi fisikmu dengan orang tua, guru, atau dokter keluarga.
+      </div>
+    </div>
+
+    <div class="simulasi-form-card">
+      <div class="sim-step-indicator">
+        <div>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-blue); text-transform: uppercase;">Investigasi Detektif</span>
+          <h3 id="stepCounterText" style="font-size: 1.25rem; color: var(--color-navy); margin: 0;">Pertanyaan 1 dari 5</h3>
+        </div>
+        <div class="badge-pill badge-blue" id="stepBadgePill">Langkah 1/5</div>
+      </div>
+
+      <form id="simulasiForm" onsubmit="event.preventDefault(); submitSimulation();">
+
+        <div class="sim-question-block active" id="sim-q-1">
+          <h4 style="font-size: 1.25rem; color: var(--color-navy); margin-bottom: 6px;">
+            1. Berapa banyak gelas air putih yang biasanya kamu minum dalam sehari?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--color-navy-medium);">Pilih kebiasaan yang paling mencerminkan rutinitasmu:</p>
+
+          <div class="sim-choices-grid">
+            <div class="sim-choice-item" onclick="selectSimChoice(1, 5, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>A.</strong> Lebih dari 7 – 8 gelas sehari (Sangat rajin minum)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(1, 15, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>B.</strong> Sekitar 5 – 6 gelas sehari (Cukup teratur)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(1, 25, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>C.</strong> Hanya 3 – 4 gelas sehari (Sering lupa minum)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(1, 35, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>D.</strong> Kurang dari 3 gelas sehari (Hampir tidak pernah minum air putih)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-question-block" id="sim-q-2">
+          <h4 style="font-size: 1.25rem; color: var(--color-navy); margin-bottom: 6px;">
+            2. Apakah kamu sering menahan rasa ingin buang air kecil saat bermain atau belajar?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--color-navy-medium);">Menahan buang air kecil dapat memberi beban berlebih pada saluran kemih:</p>
+
+          <div class="sim-choices-grid">
+            <div class="sim-choice-item" onclick="selectSimChoice(2, 5, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>A.</strong> Tidak pernah, langsung izin ke toilet saat terasa</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(2, 10, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>B.</strong> Jarang sekali, hanya jika situasi sangat mendesak</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(2, 20, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>C.</strong> Kadang-kadang menahan karena asyik main game/pelajaran</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(2, 30, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>D.</strong> Sangat sering menahan berjam-jam</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-question-block" id="sim-q-3">
+          <h4 style="font-size: 1.25rem; color: var(--color-navy); margin-bottom: 6px;">
+            3. Berdasarkan pengamatan visualmu, bagaimana warna urine yang paling sering kamu amati?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--color-navy-medium);">Warna urine adalah detektor tingkat hidrasi alami tubuh:</p>
+
+          <div class="sim-choices-grid">
+            <div class="sim-choice-item" onclick="selectSimChoice(3, 5, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>A.</strong> Jernih bening atau kuning sangat muda (Hidrasi optimal)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(3, 10, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>B.</strong> Kuning cerah transparan (Hidrasi cukup)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(3, 25, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>C.</strong> Kuning pekat / agak keruh (Tanda tubuh kekurangan cairan)</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(3, 35, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>D.</strong> Sangat gelap atau disertai rasa tidak nyaman saat buang air</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-question-block" id="sim-q-4">
+          <h4 style="font-size: 1.25rem; color: var(--color-navy); margin-bottom: 6px;">
+            4. Seberapa sering kamu mengonsumsi minuman kemasan manis atau bersoda?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--color-navy-medium);">Kadar gula tinggi dan pemanis buatan berlebih memerlukan kerja ekstra dari ginjal:</p>
+
+          <div class="sim-choices-grid">
+            <div class="sim-choice-item" onclick="selectSimChoice(4, 5, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>A.</strong> Jarang sekali, hampir selalu memilih air putih segar</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(4, 10, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>B.</strong> Sekali atau dua kali dalam seminggu</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(4, 25, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>C.</strong> Hampir setiap hari beli minuman manis di kantin</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(4, 35, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>D.</strong> Setiap hari lebih dari 2 botol / gelas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-question-block" id="sim-q-5">
+          <h4 style="font-size: 1.25rem; color: var(--color-navy); margin-bottom: 6px;">
+            5. Apakah kamu pernah merasakan pegal atau ngilu di area pinggang belakang?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--color-navy-medium);">Ginjal terletak di bagian punggung bawah di balik tulang rusuk terbawah:</p>
+
+          <div class="sim-choices-grid">
+            <div class="sim-choice-item" onclick="selectSimChoice(5, 5, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>A.</strong> Tidak pernah sama sekali</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(5, 10, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>B.</strong> Pernah sedikit pegal hanya setelah olahraga berat</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(5, 25, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>C.</strong> Kadang-kadang pegal terutama jika kurang minum seharian</span>
+            </div>
+            <div class="sim-choice-item" onclick="selectSimChoice(5, 35, this)">
+              <div class="sim-choice-radio"></div>
+              <span><strong>D.</strong> Cukup sering terasa nyeri/ngilu yang mengganggu</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-top:20px; padding-top:20px; border-top:1px solid var(--color-navy-soft);">
+          <button type="button" class="btn btn-secondary btn-sm" id="prevStepBtn" onclick="prevStep()" style="display: none;">
+            Soal Sebelumnya
+          </button>
+
+          <div style="flex-grow:1;"></div>
+
+          <button type="button" class="btn btn-primary" id="nextStepBtn" onclick="nextStep()">
+            Lanjut ke Soal Berikutnya
+          </button>
+
+          <button type="submit" class="btn btn-accent btn-lg" id="submitSimBtn" style="display: none;">
+            Hitung Skor Simulasi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  const answers = {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null
+  };
+
+  function selectSimChoice(step, score, element) {
+    answers[step] = score;
+
+    if (typeof SoundFX !== "undefined" && SoundFX.playPop) {
+      SoundFX.playPop();
+    }
+
+    const parent = element.parentElement;
+
+    parent.querySelectorAll(".sim-choice-item").forEach(function(item) {
+      item.classList.remove("selected");
+    });
+
+    element.classList.add("selected");
+  }
+
+  function updateStepUI() {
+    for (let i = 1; i <= totalSteps; i++) {
+      const questionBlock = document.getElementById("sim-q-" + i);
+
+      if (questionBlock) {
+        if (i === currentStep) {
+          questionBlock.classList.add("active");
+        } else {
+          questionBlock.classList.remove("active");
+        }
+      }
+    }
+
+    document.getElementById("stepCounterText").innerText =
+      "Pertanyaan " + currentStep + " dari " + totalSteps;
+
+    document.getElementById("stepBadgePill").innerText =
+      "Langkah " + currentStep + "/" + totalSteps;
+
+    const prevButton = document.getElementById("prevStepBtn");
+    const nextButton = document.getElementById("nextStepBtn");
+    const submitButton = document.getElementById("submitSimBtn");
+
+    prevButton.style.display =
+      currentStep > 1 ? "inline-flex" : "none";
+
+    if (currentStep === totalSteps) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-flex";
+    } else {
+      nextButton.style.display = "inline-flex";
+      submitButton.style.display = "none";
+    }
+  }
+
+  function nextStep() {
+    if (answers[currentStep] === null) {
+      alert("Detektif Muda, pilih salah satu jawaban terlebih dahulu sebelum lanjut ya!");
+      return;
+    }
+
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateStepUI();
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      currentStep--;
+      updateStepUI();
+    }
+  }
+
+  function submitSimulation() {
+    const missingStep = Object.keys(answers).find(function(step) {
+      return answers[step] === null;
+    });
+
+    if (missingStep) {
+      alert("Detektif Muda, jawab semua pertanyaan terlebih dahulu.");
+      currentStep = Number(missingStep);
+      updateStepUI();
+      return;
+    }
+
+    const answerValues = Object.values(answers);
+    const submitButton = document.getElementById("submitSimBtn");
+
+    submitButton.disabled = true;
+    submitButton.innerText = "Menganalisis...";
+
+    fetch("/hasil", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        answers: answerValues
+      })
+    })
+    .then(function(response) {
+      return response.json().then(function(data) {
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Gagal menghitung hasil simulasi."
+          );
+        }
+
+        return data;
+      });
+    })
+    .then(function(data) {
+      if (!data.success) {
+        throw new Error(
+          data.message || "Gagal menghitung hasil simulasi."
+        );
+      }
+
+      window.location.href = data.redirect;
+    })
+    .catch(function(error) {
+      submitButton.disabled = false;
+      submitButton.innerText = "Hitung Skor Simulasi";
+      alert(error.message);
+    });
+  }
+
+  updateStepUI();
+</script>
+{% endblock %}

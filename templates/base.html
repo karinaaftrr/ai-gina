@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AI GINA — Petualangan Detektif Ginjal{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2302113E'/%3E%3Cpath d='M10 9h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z' fill='%231c04a1'/%3E%3Ccircle cx='16' cy='20' r='5' fill='%23db1c1c'/%3E%3C/svg%3E">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <div class="safety-banner">
+    <span><strong>Catatan Edukasi:</strong> Website ini merupakan media pembelajaran matematika & data untuk siswa SD. <strong>AI GINA bukan dokter</strong> dan hasil simulasi bukan diagnosis medis.</span>
+  </div>
+
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="{{ url_for('index') }}" class="brand-logo" aria-label="Beranda AI GINA">
+        <div class="logo-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">AI <span>GINA</span></div>
+          <div class="brand-tagline">Detektif Ginjal</div>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="{{ url_for('index') }}" class="nav-link {% if request.path == '/' %}active{% endif %}">Beranda</a></li>
+          <li><a href="{{ url_for('belajar') }}" class="nav-link {% if '/misi' in request.path or request.path in ['/petualangan', '/belajar'] %}active{% endif %}">Petualangan</a></li>
+          <li><a href="{{ url_for('simulasi') }}" class="nav-link {% if request.path == '/simulasi' %}active{% endif %}">Simulasi</a></li>
+          <li><a href="{{ url_for('rekomendasi') }}" class="nav-link {% if request.path == '/rekomendasi' %}active{% endif %}">Rekomendasi</a></li>
+          <li><a href="{{ url_for('sumber') }}" class="nav-link {% if request.path == '/sumber' %}active{% endif %}">Sumber</a></li>
+          <li><a href="{{ url_for('guru') }}" class="nav-link {% if request.path == '/guru' %}active{% endif %}">Untuk Guru</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <span class="nav-progress-badge" id="navProgressBadge">0/6 Misi Selesai</span>
+        <a href="{{ url_for('belajar') }}" class="btn btn-primary btn-sm">Mulai Petualangan</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <div class="modal-overlay" id="badgeModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalBadgeName">
+    <div class="badge-modal-card">
+      <div class="badge-svg-wrap" style="width:72px;height:72px;border-radius:50%;background:var(--color-blue-tint);border:2px solid var(--color-blue);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--color-blue);">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="7"></circle>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+        </svg>
+      </div>
+      <div class="badge-pill badge-red" style="margin-bottom:12px;">MISSION COMPLETE</div>
+      <h2 id="modalBadgeName" style="color:var(--color-navy);margin-bottom:8px;">NAMA LENCANA</h2>
+      <p id="modalBadgeDesc" style="color:var(--color-navy-medium);margin-bottom:24px;font-size:0.95rem;">Deskripsi keberhasilan detektif muda.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <button class="btn btn-primary" id="modalNextBtn">Lanjut ke Misi Berikutnya</button>
+        <button class="btn btn-secondary btn-sm" onclick="closeBadgeModal()">Tutup & Pelajari Lagi</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand-main">
+        <div class="footer-gina-foto">
+          <img src="{{ url_for('static', filename='images/ai-gina2.png') }}" alt="AI GINA">
+        </div>
+        <div class="footer-brand-text">
+          <h3>AI <span>GINA</span></h3>
+          <p>Petualangan Detektif Ginjal</p>
+        </div>
+      </div>
+
+      <div class="footer-partner">
+        <p class="footer-partner-text">Dikembangkan sebagai media pembelajaran interaktif dalam kegiatan Pengabdian kepada Masyarakat Universitas Lampung.</p>
+        <div class="footer-partner-logo">
+          <img src="{{ url_for('static', filename='images/border-terimakasih.png') }}" alt="Logo Universitas Lampung dan mitra kegiatan">
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 AI GINA — Pengabdian Kepada Masyarakat. Dikembangkan dengan prinsip ramah anak dan keselamatan edukasi.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
